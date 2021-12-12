@@ -16,7 +16,7 @@ public class HouseService {
 
     public List<HouseModel> getHousesByStreetId(int streetId) throws HouseNotFoundException {
         if (houseRepo.findHousesByStreetId(streetId) == null) {
-            throw new HouseNotFoundException("Улицы не найдены");
+            throw new HouseNotFoundException("Дома на улице с id=" + streetId + " не найдены");
         }
         List<HouseModel> houses = HouseModel.toModels(houseRepo.findHousesByStreetId(streetId));
         for (HouseModel house: houses) {
@@ -27,13 +27,13 @@ public class HouseService {
 
     public Long getApartmentCountsByStreetId(int streetId) throws HouseNotFoundException {
         if (houseRepo.findById(streetId).isEmpty()) {
-            throw new HouseNotFoundException("Дома с таким id не существует");
+            throw new HouseNotFoundException("Дома на улице с id=" + streetId + " не найдены");
         } return houseRepo.countApartmentsByStreetId(streetId);
     }
 
     public List<HouseModel> getHousesByCityId(int cityId) throws HouseNotFoundException {
         if (houseRepo.findHousesByCityId(cityId) == null) {
-            throw new HouseNotFoundException("Улицы не найдены");
+            throw new HouseNotFoundException("Дома в городе с id=" + cityId + " не найдены");
         }
         List<HouseModel> houses = HouseModel.toModels(houseRepo.findHousesByCityId(cityId));
         for (HouseModel house: houses) {
@@ -44,13 +44,13 @@ public class HouseService {
 
     public Long getApartmentCountsByCityId(int cityId) throws HouseNotFoundException {
         if (houseRepo.findById(cityId).isEmpty()) {
-            throw new HouseNotFoundException("Дома с таким id не существует");
+            throw new HouseNotFoundException("Дома в городе с id=" + cityId + " не найдены");
         } return houseRepo.countApartmentsByCityId(cityId);
     }
 
     public String getHouseAddress(int houseId) throws HouseNotFoundException {
         if (houseRepo.findById(houseId).isEmpty()) {
-            throw new HouseNotFoundException("Дома с таким id не существует");
+            throw new HouseNotFoundException("Дома с id=" + houseId + "не существует");
         }
         String houseNumber = houseRepo.findById(houseId).get().getNumber();
         String streetName = houseRepo.findById(houseId).get().getStreet().getName();
