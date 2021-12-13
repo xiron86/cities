@@ -50,7 +50,7 @@ public class HouseService {
 
     public String getHouseAddress(int houseId) throws HouseNotFoundException {
         if (houseRepo.findById(houseId).isEmpty()) {
-            throw new HouseNotFoundException("Дома с id=" + houseId + "не существует");
+            throw new HouseNotFoundException("Дома с id=" + houseId + " не существует");
         }
         String houseNumber = houseRepo.findById(houseId).get().getNumber();
         String streetName = houseRepo.findById(houseId).get().getStreet().getName();

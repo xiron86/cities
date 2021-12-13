@@ -16,7 +16,7 @@ public class StreetService {
 
     public List<StreetModel> getStreets(int cityId) throws StreetNotFoundException {
         if (streetRepo.findStreetsByCityId(cityId) == null) {
-            throw new StreetNotFoundException("Улицы не найдены");
+            throw new StreetNotFoundException("Улицы в городе с id=" + cityId + " не найдены");
         }
         List<StreetModel> streets = StreetModel.toModels(streetRepo.findStreetsByCityId(cityId));
         for (StreetModel street: streets) {
@@ -26,7 +26,7 @@ public class StreetService {
 
     public Long getHouseCounts(int streetId) throws StreetNotFoundException {
         if (streetRepo.findById(streetId).isEmpty()) {
-            throw new StreetNotFoundException("Улицы с таким id не существует");
+            throw new StreetNotFoundException("Улицы с id=" + streetId + " не существует");
         } return streetRepo.countHousesByStreetId(streetId);
     }
 }

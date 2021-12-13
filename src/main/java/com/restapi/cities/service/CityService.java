@@ -30,13 +30,13 @@ public class CityService {
 
     public Long getHouseCounts(int cityId) throws CityNotFoundException {
         if (cityRepo.findById(cityId).isEmpty()) {
-            throw new CityNotFoundException("Города с таким id не существует");
+            throw new CityNotFoundException("Города с id=" + cityId + " не существует");
         } return cityRepo.countHousesByCityId(cityId);
     }
 
     public CityModel getCity(int id) throws CityNotFoundException {
         if (cityRepo.findById(id).isEmpty()) {
-            throw new CityNotFoundException("Город не найден");
+            throw new CityNotFoundException("Город с id=" + id + " не найден");
         } return CityModel.toModel(cityRepo.findById(id).get());
     }
 }

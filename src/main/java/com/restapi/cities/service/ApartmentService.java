@@ -14,7 +14,7 @@ public class ApartmentService {
 
     public ApartmentModel getApartment(int id) throws ApartmentNotFoundException {
         if (apartmentRepo.findById(id).isEmpty()) {
-            throw new ApartmentNotFoundException("Квартира не найдена");
+            throw new ApartmentNotFoundException("Квартира c id=" + id + " не найдена");
         } return ApartmentModel.toModel(apartmentRepo.findById(id).get());
     }
 }
